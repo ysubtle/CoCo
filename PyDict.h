@@ -9,11 +9,19 @@ class PyHash
 public:
     std::size_t operator() (const PyObject* key) const;
 };
+
+std::size_t PyHash::operator() (const PyObject* key) const {
+    vector<PyObject*> args;
+    PyInt* hashVal = (PyInt*) const_cast<PyObject*>(key)->callMethod("__hash__",&args);
+    return hashVal->getVal();
+};
+
 class PyKeysEqual
 {
 public:
     bool operator() (const PyObject* key1, const PyObject* key2) const;
 };
+
 class PyDict : public PyObject {
 public:
     PyDict();
