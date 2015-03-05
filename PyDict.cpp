@@ -18,7 +18,7 @@ bool PyKeysEqual::operator() (const PyObject* key1, const PyObject* key2) const 
 }
 
 PyDict::PyDict() {
-	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map;
+	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map; //constructor for PyDict
 }
 
 PyDict::~PyDict() {
@@ -55,6 +55,9 @@ PyObject* PyDict::getVal(PyObject* key) {
 }
 
 void PyDict::setVal(PyObject* key, PyObject* val) {
+	pair<PyObject*, PyObject*> npair (key, val);
+        map.insert(npair);
+        return npair;
 
 }
 
