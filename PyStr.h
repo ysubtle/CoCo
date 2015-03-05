@@ -43,6 +43,7 @@ protected:
     PyObject* __bool__(vector<PyObject*>* args); 
     PyObject* __funlist__(vector<PyObject*>* args); 
     PyObject* __eq__(vector<PyObject*>* args);
+    PyObject* __hash__(vector<PyObject*>* args);
     PyObject* split(vector<PyObject*>* args);
     
     PyObject* __getitem__(vector<PyObject*>* args);

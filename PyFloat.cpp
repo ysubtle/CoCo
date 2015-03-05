@@ -106,3 +106,28 @@ PyObject* PyFloat::__bool__(vector<PyObject*>* args) {
     
     return new PyBool(true);
 }
+
+PyObject* PyFloat::__hash__(vector<PyObject*>* args) {
+    ostringstream msg;
+    
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    return static_cast<int>(this->val);
+}
+
+PyObject* PyFloat::__eq__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 1) {
+        msg << "TypeError: expected 1 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    //We should check the type of args[0] before casting it. 
+    PyFloat* other = (PyFloat*) (*args)[0];
+
+    return new PyBool(this->val == other->val);
+}
