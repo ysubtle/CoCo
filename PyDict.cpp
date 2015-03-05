@@ -6,6 +6,10 @@
 
 using namespace std;
 
+PyKeysEqual::PyKeysEqual() {
+	
+}
+
 bool PyKeysEqual::operator() (const PyObject* key1, const PyObject* key2) const {
     vector<PyObject*> args;
     args.push_back(const_cast<PyObject*>(key2));
@@ -18,7 +22,7 @@ PyDict::PyDict() {
 }
 
 PyDict::~PyDict() {
-
+	// free memory
 }
 
 PyType* PyDict::getType() {
@@ -72,7 +76,7 @@ PyObject* PyDict::__iter__(vector<PyObject*>* args) {
 }
 
 PyObject* PyDict::keys(vector<PyObject*>* args) {
-
+	
 }
 
 PyObject* PyDict::values(vector<PyObject*>* args) {
