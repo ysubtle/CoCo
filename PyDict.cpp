@@ -15,7 +15,7 @@ PyDict::~PyDict() {
 }
 
 PyType* PyDict::getType() {
-
+	return PyTypes[PyDictType];
 }
 
 string PyDict::toString() {
