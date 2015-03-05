@@ -203,8 +203,8 @@ unordered_map<PyTypeId, PyType*, std::hash<int> > initTypes() {
     PyType* dictType = new PyType("dict", PyDictType);
     types[PyDictType] = dictType;
 
-    PyType* dictIteratorType= new PyType( "dict_iterator", PyDictIteratorType);
-    types[PyDictIteratorType] = dictIteratorType;
+    PyType* dictIteratorType= new PyType( "dict_keyiterator", PyDictKeyIteratorType);
+    types[PyDictKeyIteratorType] = dictIteratorType;
 
     PyType* tupleType = new PyType("tuple", PyTupleType);
     types[PyTupleType] = tupleType;

@@ -52,7 +52,7 @@ enum PyTypeId {
     PyCellType,
     PyExceptionTypeId,
     PyDictType,
-    PyDictIteratorType  
+    PyDictKeyIteratorType  
 };
 
 class PyType : public PyCallable {

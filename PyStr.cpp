@@ -37,7 +37,7 @@ PyStr::PyStr(string s) : PyObject() {
     dict["__bool__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__bool__);
     dict["__funlist__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__funlist__);
     dict["__eq__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__eq__);
-    dict["__hash__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__eq__);
+    dict["__hash__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__hash__);
     dict["split"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::split);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__len__);
@@ -119,12 +119,12 @@ PyObject* PyStr::__bool__(vector<PyObject*>* args) {
 }
 
 PyObject* PyStr::__eq__(vector<PyObject*>* args) {
-    ostringstream msg; 
+    // ostringstream msg; 
 
-    if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
-    }
+    // if (args->size() != 1) {
+    //     msg << "TypeError: expected 1 arguments, got " << args->size();
+    //     throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    // }
     PyStr* arg = (PyStr*) (*args)[0];
     
     if (this->toString() == arg->toString())
@@ -134,16 +134,16 @@ PyObject* PyStr::__eq__(vector<PyObject*>* args) {
 }
 
 PyObject* PyStr::__hash__(vector<PyObject*>* args) {
-    ostringstream msg; 
+    ostringstream msg;
 
-    if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 
     hash<string> hash_string;
 
-    return new PyInt(hash_string(this->val));
+    return new PyInt(hash_string(this->toString()));
 }
 
 PyObject* PyStr::__funlist__(vector<PyObject*>* args) {

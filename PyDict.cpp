@@ -20,6 +20,10 @@ std::size_t PyHash::operator() (const PyObject* key) const {
 PyDict::PyDict() {
 	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map; //constructor for PyDict
     dict["__setitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDict::__setitem__);
+    dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDict::__getitem__);
+    dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDict::__iter__);
+    dict["keys"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDict::keys);
+    dict["values"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDict::values);
 }
 
 PyDict::~PyDict() {
@@ -49,7 +53,6 @@ PyObject* PyDict::getVal(PyObject* key) {
 	auto se = map.find(key);   //auto infers type
 	if (se == map.end()) {
 		cout << "Error, not found" << endl;
-		return se->second;
 	} else {
 		return se->second;
 	}
@@ -63,7 +66,11 @@ void PyDict::setVal(PyObject* key, PyObject* val) {
 PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
     PyObject* PyKey = (PyObject*) (*args)[0];
     auto se = map.find(PyKey);
-    return se->second;
+    if (se == map.end()) {
+        cout << "Error, not found" << endl;
+    } else {
+        return se->second;
+    }
 }
 
 PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
@@ -76,8 +83,11 @@ PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
 
     PyObject* key = (PyObject*) (*args)[0];
     PyObject* obj = (PyObject*) (*args)[1];
+
     pair<PyObject*, PyObject*> npair (key, obj);
+
     map.insert(npair);
+
     return new PyNone();
 }
 
