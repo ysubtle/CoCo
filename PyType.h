@@ -51,7 +51,8 @@ enum PyTypeId {
     PyTupleIteratorType,
     PyCellType,
     PyExceptionTypeId,
-    PyDictType    
+    PyDictType,
+    PyDictIteratorType    
 };
 
 class PyType : public PyCallable {
