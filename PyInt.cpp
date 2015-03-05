@@ -251,7 +251,7 @@ PyObject* PyInt::__hash__(vector<PyObject*>* args) {
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 
-    return this->getVal();
+    return new PyInt(this->getVal());
 }
 
 PyObject* PyInt::__lt__(vector<PyObject*>* args) {
