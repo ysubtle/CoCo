@@ -110,7 +110,7 @@ PyObject* PyDict::__iter__(vector<PyObject*>* args) {
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());
     }
 
-    return new PyDictIterator(map);
+    return new PyDictIterator(&map);
 }
 
 PyObject* PyDict::keys(vector<PyObject*>* args) {

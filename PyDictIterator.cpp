@@ -2,10 +2,10 @@
 #include <string>
 using namespace std;
 
-PyDictIterator::PyDictIterator(unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map) {
+PyDictIterator::PyDictIterator(unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>* map) {
     this->index = 0;
-    this->map = map;
-    it = map.begin();
+    map = map;
+    it = map->begin();
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDictIterator::__iter__);
     dict["__next__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDictIterator::__next__);
 }
@@ -33,7 +33,7 @@ PyObject* PyDictIterator::__iter__(vector<PyObject*>* args) {
         msg << "TypeError: expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
-    it = map.begin();
+    it = map->begin();
     return this;
 }
 
@@ -44,10 +44,7 @@ PyObject* PyDictIterator::__next__(vector<PyObject*>* args) {
         msg << "TypeError: expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
-
-    if (it == map.end()) {
-        cout << "Too far:" << endl;
-
+    if (it == map->end()) {
         msg << "Too far:";
         throw new PyException(PYSTOPITERATIONEXCEPTION, msg.str());
     }

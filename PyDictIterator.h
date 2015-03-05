@@ -12,14 +12,14 @@ using namespace std;
 
 class PyDictIterator : public PyObject {
 public:
-    PyDictIterator(unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map);
+    PyDictIterator(unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>* map);
     virtual ~PyDictIterator();
 
     PyType* getType();
     string toString();
 protected:
 	int index;
-	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map;
+	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>* map;
 	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>::iterator it;
 
     virtual PyObject* __iter__(vector<PyObject*>* args);
