@@ -1,9 +1,10 @@
 #include "PyDict.h"
 #include "PyObject.h"
 #include "PyType.h"
+#include "PyInt.h" 
 #include <vector>
 #include <unordered_map>
-
+#include <string>
 using namespace std;
 
 PyKeysEqual::PyKeysEqual() {
@@ -69,7 +70,14 @@ PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
 }
 
 PyObject* PyDict::__len__(vector<PyObject*>* args) {
+     ostringstream msg;
 
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    return new PyInt(map.size());
 }
 
 PyObject* PyDict::__iter__(vector<PyObject*>* args) {
