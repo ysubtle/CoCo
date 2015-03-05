@@ -36,6 +36,7 @@ protected:
     virtual PyObject* __int__(vector<PyObject*>* args);
     virtual PyObject* __bool__(vector<PyObject*>* args);
     virtual PyObject* __hash__(vector<PyObject*>* args);
+    virtual PyObject* __eq__(vector<PyObject*>* args);
 };
 
 #endif	/* PYFLOAT_H */
