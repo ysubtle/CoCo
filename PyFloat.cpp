@@ -115,7 +115,7 @@ PyObject* PyFloat::__hash__(vector<PyObject*>* args) {
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 
-    return static_cast<int>(this->val);
+    return new PyInt(static_cast<int>(this->val));
 }
 
 PyObject* PyFloat::__eq__(vector<PyObject*>* args) {
