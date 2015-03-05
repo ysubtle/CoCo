@@ -1,3 +1,4 @@
 /.deps
 /autom4te.cache
 *.o
+coco
