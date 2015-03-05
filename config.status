@@ -431,7 +431,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/gus/Documents/cs251/CoCo'
+ac_pwd='/home/jessica/Documents/CS 251/CoCoGus/CoCo'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -630,12 +630,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /home/gus/Documents/cs251/CoCo/install-sh"
-S["MAKEINFO"]="${SHELL} /home/gus/Documents/cs251/CoCo/missing makeinfo"
-S["AUTOHEADER"]="${SHELL} /home/gus/Documents/cs251/CoCo/missing autoheader"
-S["AUTOMAKE"]="${SHELL} /home/gus/Documents/cs251/CoCo/missing automake-1.14"
-S["AUTOCONF"]="${SHELL} /home/gus/Documents/cs251/CoCo/missing autoconf"
-S["ACLOCAL"]="${SHELL} /home/gus/Documents/cs251/CoCo/missing aclocal-1.14"
+S["install_sh"]="${SHELL} '/home/jessica/Documents/CS 251/CoCoGus/CoCo/install-sh'"
+S["MAKEINFO"]="${SHELL} \"/home/jessica/Documents/CS 251/CoCoGus/CoCo/missing\" makeinfo"
+S["AUTOHEADER"]="${SHELL} \"/home/jessica/Documents/CS 251/CoCoGus/CoCo/missing\" autoheader"
+S["AUTOMAKE"]="${SHELL} \"/home/jessica/Documents/CS 251/CoCoGus/CoCo/missing\" automake-1.14"
+S["AUTOCONF"]="${SHELL} \"/home/jessica/Documents/CS 251/CoCoGus/CoCo/missing\" autoconf"
+S["ACLOCAL"]="${SHELL} \"/home/jessica/Documents/CS 251/CoCoGus/CoCo/missing\" aclocal-1.14"
 S["VERSION"]="1.0"
 S["PACKAGE"]="coco"
 S["CYGPATH_W"]="echo"
