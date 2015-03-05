@@ -1,10 +1,4 @@
 #include "PyDict.h"
-#include "PyObject.h"
-#include "PyType.h"
-#include "PyInt.h"
-#include "PyBool.h"
-#include "PyNone.h"
-#include <vector>
 #include <unordered_map>
 #include <string>
 using namespace std;

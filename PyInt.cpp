@@ -36,6 +36,7 @@ PyInt::PyInt(int val): PyObject() {
     dict["__truediv__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__truediv__);
     dict["__mod__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__mod__);
     dict["__eq__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__eq__);
+    dict["__hash__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__hash__);
     dict["__gt__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__gt__);
     dict["__lt__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__lt__);
     dict["__ge__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__ge__);
@@ -240,6 +241,17 @@ PyObject* PyInt::__eq__(vector<PyObject*>* args) {
     PyInt* other = (PyInt*) (*args)[0];
 
     return new PyBool(val == other->val);
+}
+
+PyObject* PyInt::__hash__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 1) {
+        msg << "TypeError: expected 1 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    return this->getVal();
 }
 
 PyObject* PyInt::__lt__(vector<PyObject*>* args) {

@@ -3,6 +3,8 @@
 #include "PyInt.h"
 #include "PyDictIterator.h"
 #include "PyException.h"
+#include "PyBool.h"
+#include "PyNone.h"
 #include <vector>
 #include <sstream>
 #ifndef PYDICT_H

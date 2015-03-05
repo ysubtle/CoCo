@@ -40,6 +40,7 @@ protected:
     virtual PyObject* __truediv__(vector<PyObject*>* args);
     virtual PyObject* __mod__(vector<PyObject*>* args);
     virtual PyObject* __eq__(vector<PyObject*>* args);
+    virtual PyObject* __hash__(vector<PyObject*>* args);
     virtual PyObject* __gt__(vector<PyObject*>* args);
     virtual PyObject* __lt__(vector<PyObject*>* args);
     virtual PyObject* __ge__(vector<PyObject*>* args);
