@@ -35,6 +35,7 @@ public:
     void setVal(PyObject* key, PyObject* val);
 protected:
     unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map;
+    unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>::iterator it;
     virtual PyObject* __getitem__(vector<PyObject*>* args);
     virtual PyObject* __setitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);

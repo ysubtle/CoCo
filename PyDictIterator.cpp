@@ -2,8 +2,10 @@
 #include <string>
 using namespace std;
 
-PyDictIterator::PyDictIterator() {
+PyDictIterator::PyDictIterator(PyObject* map) {
 	this->index = 0;
+	this->map = map;
+	this->it = map.begin();
 }
 
 PyDictIterator::~PyDictIterator() {
@@ -33,7 +35,7 @@ PyObject* PyDictIterator::__iter__(vector<PyObject*>* args) {
     return this;
 }
 
-PyObject* PyListIterator::__next__(vector<PyObject*>* args) {
+PyObject* PyDictIterator::__next__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
@@ -41,5 +43,7 @@ PyObject* PyListIterator::__next__(vector<PyObject*>* args) {
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
-    return lst->getVal(index++);
+    PyObject* value = it->second;
+    it++;
+    return value;
 }
