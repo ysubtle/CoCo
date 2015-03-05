@@ -7,7 +7,7 @@
 using namespace std;
 
 PyKeysEqual::PyKeysEqual() {
-	
+
 }
 
 bool PyKeysEqual::operator() (const PyObject* key1, const PyObject* key2) const {
@@ -45,7 +45,13 @@ string PyDict::toString() {
 }
 
 PyObject* PyDict::getVal(PyObject* key) {
-
+	auto se = map.find(key);
+	if (se == map.end()) {
+		cout << "Error, not found" << endl;
+		return se->second;
+	} else {
+		return se->second;
+	}
 }
 
 void PyDict::setVal(PyObject* key, PyObject* val) {
@@ -76,7 +82,7 @@ PyObject* PyDict::__iter__(vector<PyObject*>* args) {
 }
 
 PyObject* PyDict::keys(vector<PyObject*>* args) {
-	
+
 }
 
 PyObject* PyDict::values(vector<PyObject*>* args) {
