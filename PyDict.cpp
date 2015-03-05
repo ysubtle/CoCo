@@ -19,7 +19,18 @@ PyType* PyDict::getType() {
 }
 
 string PyDict::toString() {
-
+    unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>::iterator it;
+    ostringstream s;
+    s << "{";
+    it = map.begin();
+    while (it!=map.end()) {
+        s << it->first->toString() << ": " << it->second->toString();
+        it++;
+        if (it!=map.end())
+            s << ", ";
+    }
+    s << "}";
+    return s.str();
 }
 
 PyObject* PyDict::getVal(PyObject* key) {
