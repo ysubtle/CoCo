@@ -58,15 +58,20 @@ PyObject* PyDict::getVal(PyObject* key) {
 void PyDict::setVal(PyObject* key, PyObject* val) {
     pair<PyObject*, PyObject*> npair (key, val);
     map.insert(npair);
-    return npair;
+    return new PyNone();
 }
 
 PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
-
+    PyObject* PyKey = (PyObject*) (*args)[0];
+    auto se = map.find(PyKey);
+    return se->second;
 }
 
 PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
-
+     PyObject* PyKey = (PyObject*) (*args)[0];
+     PyObject* PyObj = (PyObject*) (*args)[1];
+     map.insert({PyKey: PyObj})
+     return new PyNone();
 }
 
 PyObject* PyDict::__len__(vector<PyObject*>* args) {
