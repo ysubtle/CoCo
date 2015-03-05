@@ -302,7 +302,8 @@ int main(int argc, char* argv[]) {
         globals["Exception"] = PyTypes[PyExceptionTypeId];
         globals["len"] = new PyBuiltInLen();
         globals["concat"] = new PyBuiltInConcat();
-        
+        globals["dict"] = PyTypes[PyDictType];
+       
 
         //Now add the top-level functions
         bool foundMain = false;
