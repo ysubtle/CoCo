@@ -43,10 +43,4 @@ protected:
     virtual PyObject* values(vector<PyObject*>* args);
 };
 
-class PyDictIterator : public PyObject {
-public:
-    PyDictIterator();
-    virtual ~PyDictIterator();
-};
-
 #endif  /* PYDICT_H */

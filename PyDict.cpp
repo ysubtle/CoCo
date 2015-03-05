@@ -55,10 +55,14 @@ PyObject* PyDict::getVal(PyObject* key) {
 }
 
 void PyDict::setVal(PyObject* key, PyObject* val) {
+<<<<<<< HEAD
 	pair<PyObject*, PyObject*> npair (key, val);
         map.insert(npair);
         return npair;
 
+=======
+	
+>>>>>>> 1ccd73ac3dec46664b1c0f3f86cb6a56b4634f6b
 }
 
 PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
