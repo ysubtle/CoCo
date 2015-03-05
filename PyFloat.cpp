@@ -106,3 +106,14 @@ PyObject* PyFloat::__bool__(vector<PyObject*>* args) {
     
     return new PyBool(true);
 }
+
+PyObject* PyFloat::__hash__(vector<PyObject*>* args) {
+    ostringstream msg;
+    
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    return static_cast<int>(this->val);
+}
