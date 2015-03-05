@@ -45,7 +45,7 @@ string PyDict::toString() {
 }
 
 PyObject* PyDict::getVal(PyObject* key) {
-	auto se = map.find(key);
+	auto se = map.find(key);   //auto infers type
 	if (se == map.end()) {
 		cout << "Error, not found" << endl;
 		return se->second;
