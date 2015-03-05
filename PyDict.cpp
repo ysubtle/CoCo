@@ -1,15 +1,13 @@
 #include "PyDict.h"
 #include "PyObject.h"
 #include "PyType.h"
-#include "PyInt.h" 
+#include "PyInt.h"
+#include "PyBool.h"
+#include "PyNone.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
 using namespace std;
-
-PyKeysEqual::PyKeysEqual() {
-
-}
 
 bool PyKeysEqual::operator() (const PyObject* key1, const PyObject* key2) const {
     vector<PyObject*> args;
@@ -17,6 +15,13 @@ bool PyKeysEqual::operator() (const PyObject* key1, const PyObject* key2) const 
     PyBool* test = (PyBool*) const_cast<PyObject*>(key1)->callMethod("__eq__",&args);
     return test->getVal();
 }
+
+std::size_t PyHash::operator() (const PyObject* key) const {
+    vector<PyObject*> args;
+    PyInt* hashVal = (PyInt*) const_cast<PyObject*>(key)->callMethod("__hash__",&args);
+    return hashVal->getVal();
+};
+
 
 PyDict::PyDict() {
 	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map; //constructor for PyDict
@@ -58,7 +63,6 @@ PyObject* PyDict::getVal(PyObject* key) {
 void PyDict::setVal(PyObject* key, PyObject* val) {
     pair<PyObject*, PyObject*> npair (key, val);
     map.insert(npair);
-    return new PyNone();
 }
 
 PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
@@ -70,12 +74,13 @@ PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
 PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
      PyObject* PyKey = (PyObject*) (*args)[0];
      PyObject* PyObj = (PyObject*) (*args)[1];
-     map.insert({PyKey: PyObj})
+     pair<PyObject*, PyObject*> npair (PyKey, PyObj);
+     map.insert(npair);
      return new PyNone();
 }
 
 PyObject* PyDict::__len__(vector<PyObject*>* args) {
-     ostringstream msg;
+    ostringstream msg;
 
     if (args->size() != 0) {
         msg << "TypeError: expected 0 arguments, got " << args->size();

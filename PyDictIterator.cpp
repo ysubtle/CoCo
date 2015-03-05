@@ -2,10 +2,10 @@
 #include <string>
 using namespace std;
 
-PyDictIterator::PyDictIterator(PyObject* map) {
+PyDictIterator::PyDictIterator(unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map) {
 	this->index = 0;
 	this->map = map;
-	this->it = map.begin();
+	it = map.begin();
 }
 
 PyDictIterator::~PyDictIterator() {
@@ -43,7 +43,7 @@ PyObject* PyDictIterator::__next__(vector<PyObject*>* args) {
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
-    PyObject* value = it->second;
-    it++;
+    PyObject* value = this->it->second;
+    this->it++;
     return value;
 }

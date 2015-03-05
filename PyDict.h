@@ -1,6 +1,10 @@
 #include "PyObject.h"
 #include "PyType.h"
+#include "PyInt.h"
+#include "PyDictIterator.h"
+#include "PyException.h"
 #include <vector>
+#include <sstream>
 #ifndef PYDICT_H
 #define PYDICT_H
 
@@ -11,12 +15,6 @@ class PyHash
 {
 public:
     std::size_t operator() (const PyObject* key) const;
-};
-
-std::size_t PyHash::operator() (const PyObject* key) const {
-    vector<PyObject*> args;
-    PyInt* hashVal = (PyInt*) const_cast<PyObject*>(key)->callMethod("__hash__",&args);
-    return hashVal->getVal();
 };
 
 class PyKeysEqual
