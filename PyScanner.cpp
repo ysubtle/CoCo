@@ -182,7 +182,6 @@ PyToken* PyScanner::getToken() {
                     type = PYSTRINGTOKEN;
 
                     lex = lex + c;
-                    cout << lex << "LINE 186" << endl;
                     //eliminate the quotes on each end.
                     lex = lex.substr(1, lex.size() - 2);
                     c = in->get();

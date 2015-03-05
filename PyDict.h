@@ -5,6 +5,7 @@
 #include "PyException.h"
 #include "PyBool.h"
 #include "PyNone.h"
+#include "PyList.h"
 #include <vector>
 #include <sstream>
 #ifndef PYDICT_H

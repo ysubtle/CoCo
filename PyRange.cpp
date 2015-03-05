@@ -96,6 +96,4 @@ PyObject* PyRange::__list__(vector<PyObject*>* args) {
     }
     
     return new PyList(largs);
-    
-    
 }

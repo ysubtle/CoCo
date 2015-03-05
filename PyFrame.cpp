@@ -30,6 +30,9 @@
 #include "PyNone.h"
 #include "PyDict.h"
 #include <iostream>
+
+#include <typeinfo>
+
 using namespace std;
 
 const char* cmp_op[12] = {
@@ -443,7 +446,7 @@ PyObject* PyFrame::execute() {
                     args = new vector<PyObject*>();
                     args->push_back(u); // the index
                     args->push_back(w); // the item
-                    
+
                     w = v->callMethod("__setitem__", args); // None is returned
                     delete w;
                     delete args;
@@ -617,7 +620,14 @@ PyObject* PyFrame::execute() {
                     u = safetyPop();
                     v = safetyPop();
                     w = safetyPop();
-                    w->setVal(u, v);
+
+                    args = new vector<PyObject*>();
+                    args->push_back(u); // the index
+                    args->push_back(v); // the item
+
+                    w->callMethod("__setitem__", args);
+
+                    opStack->push(w);
                     break;
                 case DELETE_FAST:
                     //The purpose of this instruction is not well understood.

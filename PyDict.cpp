@@ -19,6 +19,7 @@ std::size_t PyHash::operator() (const PyObject* key) const {
 
 PyDict::PyDict() {
 	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map; //constructor for PyDict
+    dict["__setitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyDict::__setitem__);
 }
 
 PyDict::~PyDict() {
@@ -66,11 +67,18 @@ PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
 }
 
 PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
-     PyObject* PyKey = (PyObject*) (*args)[0];
-     PyObject* PyObj = (PyObject*) (*args)[1];
-     pair<PyObject*, PyObject*> npair (PyKey, PyObj);
-     map.insert(npair);
-     return new PyNone();
+    ostringstream msg;
+
+    if (args->size() != 2) {
+        msg << "TypeError: expected 2 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    PyObject* key = (PyObject*) (*args)[0];
+    PyObject* obj = (PyObject*) (*args)[1];
+    pair<PyObject*, PyObject*> npair (key, obj);
+    map.insert(npair);
+    return new PyNone();
 }
 
 PyObject* PyDict::__len__(vector<PyObject*>* args) {
@@ -96,9 +104,21 @@ PyObject* PyDict::__iter__(vector<PyObject*>* args) {
 }
 
 PyObject* PyDict::keys(vector<PyObject*>* args) {
-
+    vector<PyObject*>* vals = new vector<PyObject*>();
+    
+    for (auto kv : map) {
+        vals->push_back(kv.first);
+    }
+    
+    return new PyList(vals);
 }
 
 PyObject* PyDict::values(vector<PyObject*>* args) {
+    vector<PyObject*>* vals = new vector<PyObject*>();
+    
+    for (auto kv : map) {
+        vals->push_back(kv.second);
+    }
 
+    return new PyList(vals);
 }
