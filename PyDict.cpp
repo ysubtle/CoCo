@@ -6,6 +6,13 @@
 
 using namespace std;
 
+bool PyKeysEqual::operator() (const PyObject* key1, const PyObject* key2) const {
+    vector<PyObject*> args;
+    args.push_back(const_cast<PyObject*>(key2));
+    PyBool* test = (PyBool*) const_cast<PyObject*>(key1)->callMethod("__eq__",&args);
+    return test->getVal();
+}
+
 PyDict::PyDict() {
 	unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map;
 }

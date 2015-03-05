@@ -1,6 +1,9 @@
 #include "PyObject.h"
 #include "PyType.h"
 #include <vector>
+#ifndef PYDICT_H
+#define PYDICT_H
+
 #include <unordered_map>
 using namespace std;
 
@@ -39,3 +42,5 @@ protected:
     virtual PyObject* keys(vector<PyObject*>* args);
     virtual PyObject* values(vector<PyObject*>* args);
 };
+
+#endif  /* PYDICT_H */
