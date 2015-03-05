@@ -28,6 +28,7 @@
 #include "PyFunList.h"
 #include "PyInt.h"
 #include "PyNone.h"
+#include "PyDict.h"
 #include <iostream>
 using namespace std;
 
@@ -609,6 +610,15 @@ PyObject* PyFrame::execute() {
                     }
                     break;
 
+                case BUILD_MAP:
+                    opStack->push(new PyDict());
+                    break;
+                case STORE_MAP:
+                    u = safetyPop();
+                    v = safetyPop();
+                    w = safetyPop();
+                    w->setVal(u, v);
+                    break;
                 case DELETE_FAST:
                     //The purpose of this instruction is not well understood.
                     //According to the definition it deletes the local 
