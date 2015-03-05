@@ -91,6 +91,8 @@
 #include "PyBuiltInLen.h"
 #include "PyBuiltInConcat.h"
 #include "PyFrame.h"
+#include "PyDict.h"
+#include "PyDictIterator.h"
 #include "PyException.h"
 #include <iostream>
 #include <fstream>
@@ -156,6 +158,8 @@ bool verbose = false;
 unordered_map<PyTypeId, PyType*, std::hash<int> > initTypes() {
 
     unordered_map<PyTypeId, PyType*, std::hash<int> > types;
+     
+
 
     PyType* typeType = new PyType("type", PyTypeType);
     types[PyTypeType] = typeType;
@@ -195,6 +199,12 @@ unordered_map<PyTypeId, PyType*, std::hash<int> > initTypes() {
 
     PyType* funListType = new PyType("funlist", PyFunListType);
     types[PyFunListType] = funListType;
+ 
+    PyType* dictType = new PyType("dict", PyDictType);
+    types[PyDictType] = dictType;
+
+    PyType* dictIteratorType= new PyType( "dict_iterator", PyDictIteratorType);
+    types[PyDictIteratorType] = dictIteratorType;
 
     PyType* tupleType = new PyType("tuple", PyTupleType);
     types[PyTupleType] = tupleType;
@@ -216,6 +226,8 @@ unordered_map<PyTypeId, PyType*, std::hash<int> > initTypes() {
 
     PyType* cellType = new PyType("cell", PyCellType);
     types[PyCellType] = cellType;
+
+
 
     return types;
 }
@@ -290,7 +302,7 @@ int main(int argc, char* argv[]) {
         globals["Exception"] = PyTypes[PyExceptionTypeId];
         globals["len"] = new PyBuiltInLen();
         globals["concat"] = new PyBuiltInConcat();
-
+        
 
         //Now add the top-level functions
         bool foundMain = false;
