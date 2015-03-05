@@ -15,8 +15,6 @@ public:
 protected:
     virtual PyObject* __iter__(vector<PyObject*>* args);
     virtual PyObject* __next__(vector<PyObject*>* args);
-
-
 };
 
-#endif	/* PYCITITERATOR_H */
+#endif	/* PYDICTITERATOR_H */

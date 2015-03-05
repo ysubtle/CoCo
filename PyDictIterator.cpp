@@ -3,7 +3,7 @@
 using namespace std;
 
 PyDictIterator::PyDictIterator() {
-
+	this->index = 0;
 }
 
 PyDictIterator::~PyDictIterator() {
@@ -23,9 +23,23 @@ string PyDictIterator::toString() {
 }
 
 PyObject* PyDictIterator::__iter__(vector<PyObject*>* args) {
+    ostringstream msg;
 
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    return this;
 }
 
 PyObject* PyListIterator::__next__(vector<PyObject*>* args) {
+    ostringstream msg;
 
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    return lst->getVal(index++);
 }

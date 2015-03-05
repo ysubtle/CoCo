@@ -56,7 +56,7 @@ PyObject* PyDict::getVal(PyObject* key) {
 }
 
 void PyDict::setVal(PyObject* key, PyObject* val) {
-	pair<PyObject*, PyObject*> npair (key, val);
+    pair<PyObject*, PyObject*> npair (key, val);
     map.insert(npair);
     return npair;
 }
