@@ -38,6 +38,7 @@ protected:
     
     PyObject* __add__(vector<PyObject*>* args);
     PyObject* __str__(vector<PyObject*>* args);
+    PyObject* __repr__(vector<PyObject*>* args);
     PyObject* __float__(vector<PyObject*>* args);
     PyObject* __int__(vector<PyObject*>* args);
     PyObject* __bool__(vector<PyObject*>* args); 

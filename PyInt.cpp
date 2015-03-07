@@ -29,6 +29,7 @@ using namespace std;
 
 PyInt::PyInt(int val): PyObject() {
     this->val = val;
+    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__repr__);
     dict["__add__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__add__);
     dict["__sub__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__sub__);
     dict["__mul__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyInt::__mul__);
@@ -62,6 +63,9 @@ int PyInt::getVal() {
     return val;
 }
 
+PyObject* PyInt::__repr__(vector<PyObject*>* args) {
+    return new PyString(this->toString())
+}
 
 PyObject* PyInt::__add__(vector<PyObject*>* args) {
     PyInt* x;

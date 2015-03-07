@@ -63,6 +63,10 @@ string PyList::toString() {
     return s.str();
 }
 
+PyObject* PyList::__repr__(vector<PyObject*>* args) {
+    return new PyStr(this->toString());
+}
+
 PyObject* PyList::getVal(int index) {
         if (index >= data.size()) {
         throw new PyException(PYSTOPITERATIONEXCEPTION,"Stop Iteration");

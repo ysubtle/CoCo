@@ -27,6 +27,7 @@ using namespace std;
 
 PyFloat::PyFloat(double f) : PyObject() {
     val = f;
+    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__repr__);
     dict["__add__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__add__);
     dict["__float__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__float__);
     dict["__int__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__int__);

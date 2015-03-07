@@ -33,6 +33,7 @@ public:
 protected:
     int val;
     
+    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __add__(vector<PyObject*>* args);
     virtual PyObject* __sub__(vector<PyObject*>* args);
     virtual PyObject* __mul__(vector<PyObject*>* args);
