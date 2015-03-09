@@ -33,6 +33,8 @@ public:
     string toString();
     
 private:
+	PyObject* __str__(vector<PyObject*>* args);
+	PyObject* __repr__(vector<PyObject*>* args);
     PyObject* __call__(vector<PyObject*>* args);
 };
 

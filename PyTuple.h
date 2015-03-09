@@ -39,12 +39,12 @@ public:
     string toString();
     PyObject* getVal(int index);
     int size();
-    
 
-    
 protected:
     vector<PyObject*> data;
 
+    virtual PyObject* __hash__(vector<PyObject*>* args);
+    virtual PyObject* __eq__(vector<PyObject*>* args);
     virtual PyObject* __getitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);
     virtual PyObject* __iter__(vector<PyObject*>* args);

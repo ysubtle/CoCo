@@ -18,6 +18,7 @@
 
 #include "PyBuiltInIter.h"
 #include "PyException.h"
+#include "PyStr.h"
 #include <sstream>
 
  using namespace std;
@@ -33,6 +34,15 @@ PyBuiltInIter::~PyBuiltInIter() {
 
 PyType* PyBuiltInIter::getType() {
     return PyTypes[PyBuiltInType];
+}
+
+PyObject* PyBuiltInIter::__str__(vector<PyObject*>* args) {
+    string s = "<built-in function iter>";
+    return new PyStr(s);
+}
+
+PyObject* PyBuiltInIter::__repr__(vector<PyObject*>* args) {
+    return this->__str__(args);
 }
 
 PyObject* PyBuiltInIter::__call__(vector<PyObject*>* args) {

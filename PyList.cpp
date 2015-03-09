@@ -21,12 +21,14 @@
 #include "PyException.h"
 #include "PyNone.h"
 #include "PyInt.h"
+#include "PyStr.h"
 #include <sstream>
 using namespace std;
 
 PyList::PyList(vector<PyObject*>* lst) : PyObject() {
     data = *lst;
-   
+
+    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__repr__);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__getitem__);
     dict["__setitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__setitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__len__);

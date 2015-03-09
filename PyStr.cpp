@@ -31,7 +31,6 @@ using namespace std;
 PyStr::PyStr(string s) : PyObject() {
     val = s;
 
-    dict['__repr__'] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__repr__);
     dict["__add__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__add__);
     dict["__float__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__float__);
     dict["__int__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__int__);
@@ -43,6 +42,7 @@ PyStr::PyStr(string s) : PyObject() {
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__len__);
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__iter__);
+    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyStr::__repr__);
 }
 
 PyStr::PyStr(const PyStr& orig) : PyStr(orig.val) {
@@ -69,7 +69,7 @@ PyObject* PyStr::__str__(vector<PyObject*>* args) {
 
 PyObject* PyStr::__repr__(vector<PyObject*>* args) {
     string s;
-    s = "'" + this->getVal() + "'";
+    s = "'" + this->toString() + "'";
     return new PyStr(s);
 }
 

@@ -48,6 +48,10 @@ string PyFloat::toString() {
     return ss.str();
 }
 
+PyObject* PyFloat::__repr__(vector<PyObject*>* args) {
+    return new PyStr(this->toString());
+}
+
 PyObject* PyFloat::__add__(vector<PyObject*>* args) {
     ostringstream msg;
 

@@ -29,7 +29,9 @@ PyTuple::PyTuple(vector<PyObject*>* lst) : PyObject() {
     
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyTuple::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyTuple::__len__);
-    dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyTuple::__iter__);    
+    dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyTuple::__iter__);
+    dict["__hash__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyTuple::__hash__);
+    dict["__eq__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyTuple::__eq__);
 }
 
 PyTuple::~PyTuple() {
@@ -70,6 +72,34 @@ PyObject* PyTuple::getVal(int index) {
     }
     
     return data[index];
+}
+
+PyObject* PyTuple::__hash__(vector<PyObject*>* args) {
+    ostringstream msg; 
+
+    if (args->size() != 0) {
+        msg << "TypeError: expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    int k;
+    unsigned int hash_val = 0;
+
+    for (k=0; k < data.size(); k++) {
+        PyObject* obj = data[k];
+
+        PyInt* h = (PyInt*) obj->callMethod("__hash__", args);
+
+        hash_val = hash_val + h->getVal();
+    }
+
+    hash_val = hash_val % 128;
+
+    return new PyInt(hash_val);
+}
+
+PyObject* PyTuple::__eq__(vector<PyObject*>* args) {
+    
 }
 
 PyObject* PyTuple::__getitem__(vector<PyObject*>* args) {

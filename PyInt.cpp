@@ -64,7 +64,7 @@ int PyInt::getVal() {
 }
 
 PyObject* PyInt::__repr__(vector<PyObject*>* args) {
-    return new PyString(this->toString())
+    return new PyStr(this->toString());
 }
 
 PyObject* PyInt::__add__(vector<PyObject*>* args) {
