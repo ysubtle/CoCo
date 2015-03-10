@@ -36,4 +36,3 @@ PyType* PyNone::getType() {
 string PyNone::toString() {
     return "None";
 }
-

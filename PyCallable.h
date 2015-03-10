@@ -42,7 +42,6 @@ public:
     
 protected:
     virtual PyObject* __call__(vector<PyObject*>* args) = 0;
-
 };
 
 #endif	/* PYCALLABLE_H */

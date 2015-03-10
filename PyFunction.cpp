@@ -43,7 +43,7 @@ PyObject* PyFunction::__call__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != code.getArgCount()) {
-        msg << "TypeError: expected " << code.getArgCount() << " arguments, got " << args->size() << " for function " << code.getName();
+        msg << "TypeError expected " << code.getArgCount() << " arguments, got " << args->size() << " for function " << code.getName();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 

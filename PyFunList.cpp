@@ -143,7 +143,7 @@ string PyFunList::toString() {
 PyObject* PyFunList::__getitem__(vector<PyObject*>* args) {
     ostringstream msg; 
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -172,7 +172,7 @@ PyObject* PyFunList::__len__(vector<PyObject*>* args) {
     ostringstream msg; 
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -187,7 +187,7 @@ PyObject* PyFunList::__iter__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -198,7 +198,7 @@ PyObject* PyFunList::__add__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -246,7 +246,7 @@ PyObject* PyFunList::head(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -257,7 +257,7 @@ PyObject* PyFunList::tail(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -268,7 +268,7 @@ PyObject* PyFunList::concat(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     

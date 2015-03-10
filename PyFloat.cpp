@@ -32,6 +32,8 @@ PyFloat::PyFloat(double f) : PyObject() {
     dict["__float__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__float__);
     dict["__int__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__int__);
     dict["__bool__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__bool__);
+    dict["__hash__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__int__);
+    dict["__eq__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__bool__);
 }
 
 PyFloat::PyFloat(const PyFloat& orig) : PyFloat(orig.val) {
@@ -56,7 +58,7 @@ PyObject* PyFloat::__add__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -77,7 +79,7 @@ PyObject* PyFloat::__float__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -88,7 +90,7 @@ PyObject* PyFloat::__int__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -102,7 +104,7 @@ PyObject* PyFloat::__bool__(vector<PyObject*>* args) {
     ostringstream msg;
     
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -116,7 +118,7 @@ PyObject* PyFloat::__hash__(vector<PyObject*>* args) {
     ostringstream msg;
     
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 
@@ -127,7 +129,7 @@ PyObject* PyFloat::__eq__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     

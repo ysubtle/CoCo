@@ -77,7 +77,7 @@ PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 2) {
-        msg << "TypeError: expected 2 arguments, got " << args->size();
+        msg << "TypeError expected 2 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 
@@ -95,7 +95,7 @@ PyObject* PyDict::__len__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -106,7 +106,7 @@ PyObject* PyDict::__iter__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());
     }
 

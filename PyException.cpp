@@ -51,7 +51,6 @@ PyException::PyException(int exception, string msg) : PyObject(), exceptionType(
     dict["__excmatch__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyException::__excmatch__);
 }
 
-
 PyException::~PyException() {
     try {
         delete val;
@@ -85,7 +84,7 @@ PyObject* PyException::__excmatch__(vector<PyObject*>* args) {
     ostringstream msg;
     
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());      }
     
     PyObject* arg = (*args)[0];
@@ -98,7 +97,7 @@ PyObject* PyException::__excmatch__(vector<PyObject*>* args) {
     //Otherwise, the object passed was an Exception Object. Match
     //the exception values in that case. 
     if (this->getType() != arg->getType())
-        msg << "TypeError: Exception match type mismatch. Expected Exception Object got " << arg->toString();
+        msg << "TypeError Exception match type mismatch. Expected Exception Object got " << arg->toString();
         throw new PyException(PYILLEGALOPERATIONEXCEPTION,msg.str());
         
     PyException* other = (PyException*) arg;

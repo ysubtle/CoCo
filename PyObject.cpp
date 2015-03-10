@@ -38,7 +38,7 @@ PyObject* PyObject::callMethod(string name, vector<PyObject*>* args) {
     
     if (dict.find(name) == dict.end()) {
         // If we lookup the magic method and don't find it, raise an exception.
-        throw new PyException(PYILLEGALOPERATIONEXCEPTION, "TypeError: '"+ getType()->toString() + "' object has no attribute '" + name + "'");
+        throw new PyException(PYILLEGALOPERATIONEXCEPTION, "TypeError '"+ getType()->toString() + "' object has no attribute '" + name + "'");
     }
     
     // Set the mbr pointer to the function's address.
@@ -59,6 +59,7 @@ PyObject* PyObject::callMethod(string name, vector<PyObject*>* args) {
 
 PyObject::PyObject() {
     dict["__str__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyObject::__str__);
+    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyObject::__repr__);
     dict["__type__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyObject::__type__);
 }
 
@@ -89,7 +90,18 @@ PyObject* PyObject::__str__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    return new PyStr(toString());
+}
+
+PyObject* PyObject::__repr__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 0) {
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -100,7 +112,7 @@ PyObject* PyObject::__type__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     

@@ -59,11 +59,15 @@ PyObject* PyType::__str__(vector<PyObject*>* args) {
     return new PyStr("<class '" +toString()+"'>");
 }
 
+PyObject* PyType::__repr__(vector<PyObject*>* args) {
+    return __str__(args);
+}
+
 PyObject* PyType::__type__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -86,7 +90,7 @@ PyObject* PyType::__call__(vector<PyObject*>* args) {
     ostringstream msg; 
     
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     

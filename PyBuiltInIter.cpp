@@ -51,7 +51,7 @@ PyObject* PyBuiltInIter::__call__(vector<PyObject*>* args) {
     ostringstream msg;
     
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());   
     }
     

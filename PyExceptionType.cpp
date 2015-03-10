@@ -36,7 +36,7 @@ PyObject* PyExceptionType::__call__(vector<PyObject*>* args) {
     int exctype;
 
     if (args->size() > 2) {
-        msg << "TypeError: expected 1 or 2 arguments, got " << args->size();
+        msg << "TypeError expected 1 or 2 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION, msg.str());
     }
 
@@ -44,7 +44,7 @@ PyObject* PyExceptionType::__call__(vector<PyObject*>* args) {
         return new PyException(PYEXCEPTION, (*args)[0]);
 
     if ((*args)[0]->getType()->typeId() != PyIntType)
-        throw new PyException(PYILLEGALOPERATIONEXCEPTION, "TypeError: expected int for first argument to Exception.");
+        throw new PyException(PYILLEGALOPERATIONEXCEPTION, "TypeError expected int for first argument to Exception.");
     
     exctype = ((PyInt*) (*args)[0])->getVal();
     return new PyException(exctype, (*args)[1]);

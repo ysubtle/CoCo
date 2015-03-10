@@ -21,6 +21,7 @@
 #include "PyException.h"
 #include "PyInt.h"
 #include "PyType.h"
+#include "PyBool.h"
 #include <sstream>
 using namespace std;
 
@@ -78,7 +79,7 @@ PyObject* PyTuple::__hash__(vector<PyObject*>* args) {
     ostringstream msg; 
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
 
@@ -99,14 +100,29 @@ PyObject* PyTuple::__hash__(vector<PyObject*>* args) {
 }
 
 PyObject* PyTuple::__eq__(vector<PyObject*>* args) {
-    
+    ostringstream msg;
+
+    if (args->size() != 1) {
+        msg << "TypeError expected 1 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    PyObject* obj = (*args)[0];
+
+    if (obj->getType() != this->getType()) {
+        return new PyBool(false);
+    }
+
+    PyTuple* other = (PyTuple*) (*args)[0];
+
+    return new PyBool(data == other->data);
 }
 
 PyObject* PyTuple::__getitem__(vector<PyObject*>* args) {
     ostringstream msg; 
 
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     
@@ -125,7 +141,7 @@ PyObject* PyTuple::__len__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     return new PyInt(data.size());
@@ -135,7 +151,7 @@ PyObject* PyTuple::__iter__(vector<PyObject*>* args) {
     ostringstream msg;
     
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
     }
     

@@ -63,6 +63,7 @@ protected:
     int refCount;
     
     virtual PyObject* __str__(vector<PyObject*>* args);
+    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __type__(vector<PyObject*>* args);     
 };
 

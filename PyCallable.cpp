@@ -16,6 +16,7 @@
  */
 
 #include "PyCallable.h"
+#include "PyStr.h"
 #include "PyException.h"
 
 PyCallable::PyCallable() : PyObject() {

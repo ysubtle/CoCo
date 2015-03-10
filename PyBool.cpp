@@ -29,10 +29,12 @@ using namespace std;
 PyBool::PyBool() : PyObject() {
     val = false;
     
+    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyBool::__repr__);
     dict["__float__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyBool::__float__);
     dict["__int__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyBool::__int__);
     dict["__bool__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyBool::__bool__);
     dict["__eq__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyBool::__eq__);
+    dict["__hash__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyBool::__hash__);
 }
 
 PyBool::PyBool(bool val) : PyBool() {
@@ -53,11 +55,28 @@ string PyBool::toString() {
     return "False";
 }
 
+PyObject* PyBool::__repr__(vector<PyObject*>* args) {
+    return new PyStr(toString());
+}
+
+PyObject* PyBool::__hash__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 0) {
+        msg << "TypeError expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());    }
+    
+    if (this->getVal())
+        return new PyInt(1);
+    
+    return new PyInt(0);
+}
+
 PyObject* PyBool::__eq__(vector<PyObject*>* args) {
     ostringstream msg; 
 
     if (args->size() != 1) {
-        msg << "TypeError: expected 1 arguments, got " << args->size();
+        msg << "TypeError expected 1 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());
     }
 
@@ -79,7 +98,7 @@ PyObject* PyBool::__float__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());    }
     
     if (this->getVal())
@@ -92,7 +111,7 @@ PyObject* PyBool::__int__(vector<PyObject*>* args) {
     ostringstream msg;
 
     if (args->size() != 0) {
-        msg << "TypeError: expected 0 arguments, got " << args->size();
+        msg << "TypeError expected 0 arguments, got " << args->size();
         throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());    }
     
     if (this->getVal())

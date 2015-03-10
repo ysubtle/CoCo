@@ -94,6 +94,7 @@
 #include "PyDict.h"
 #include "PyDictIterator.h"
 #include "PyException.h"
+#include "PyBuiltInRepr.h"
 #include <iostream>
 #include <fstream>
 #include <unordered_map>
@@ -227,7 +228,8 @@ unordered_map<PyTypeId, PyType*, std::hash<int> > initTypes() {
     PyType* cellType = new PyType("cell", PyCellType);
     types[PyCellType] = cellType;
 
-
+    PyType* reprType = new PyType("repr", PyReprType);
+    types[PyReprType] = reprType;
 
     return types;
 }
@@ -303,7 +305,7 @@ int main(int argc, char* argv[]) {
         globals["len"] = new PyBuiltInLen();
         globals["concat"] = new PyBuiltInConcat();
         globals["dict"] = PyTypes[PyDictType];
-       
+        globals["repr"] = new PyBuiltInRepr();
 
         //Now add the top-level functions
         bool foundMain = false;

@@ -52,7 +52,8 @@ enum PyTypeId {
     PyCellType,
     PyExceptionTypeId,
     PyDictType,
-    PyDictKeyIteratorType  
+    PyDictKeyIteratorType,
+    PyReprType
 };
 
 class PyType : public PyCallable {
@@ -70,6 +71,7 @@ protected:
     
     virtual PyObject* __call__(vector<PyObject*>* args);
     virtual PyObject* __str__(vector<PyObject*>* args);
+    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __type__(vector<PyObject*>* args);
 };
 
