@@ -37,15 +37,6 @@ PyType* PyBuiltInPrint::getType() {
     return PyTypes[PyBuiltInType];
 }
 
-PyObject* PyBuiltInPrint::__str__(vector<PyObject*>* args) {
-    string s = "<built-in function print>";
-    return new PyStr(s);
-}
-
-PyObject* PyBuiltInPrint::__repr__(vector<PyObject*>* args) {
-    return this->__str__(args);
-}
-
 PyObject* PyBuiltInPrint::__call__(vector<PyObject*>* args) {
     //cerr << "In print() with " << args->size() << " args to print." <<  endl;
     string output = "";

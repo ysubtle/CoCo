@@ -36,15 +36,6 @@ PyType* PyBuiltInInput::getType() {
     return PyTypes[PyBuiltInType];
 }
 
-PyObject* PyBuiltInInput::__str__(vector<PyObject*>* args) {
-    string s = "<built-in function input>";
-    return new PyStr(s);
-}
-
-PyObject* PyBuiltInInput::__repr__(vector<PyObject*>* args) {
-    return this->__str__(args);
-}
-
 PyObject* PyBuiltInInput::__call__(vector<PyObject*>* args) {
     PyObject* x;
     PyStr* y;

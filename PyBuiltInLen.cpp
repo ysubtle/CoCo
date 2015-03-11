@@ -39,15 +39,6 @@ PyType* PyBuiltInLen::getType() {
     return PyTypes[PyBuiltInType];
 }
 
-PyObject* PyBuiltInLen::__str__(vector<PyObject*>* args) {
-    string s = "<built-in function len>";
-    return new PyStr(s);
-}
-
-PyObject* PyBuiltInLen::__repr__(vector<PyObject*>* args) {
-    return this->__str__(args);
-}
-
 PyObject* PyBuiltInLen::__call__(vector<PyObject*>* args) {
     PyObject* x;
     ostringstream msg;

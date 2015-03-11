@@ -36,5 +36,5 @@ PyObject* PyBuiltInRepr::__call__(vector<PyObject*>* args) {
 }
 
 string PyBuiltInRepr::toString() {
-    return "<built-in function repr>";
+    return "repr";
 }

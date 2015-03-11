@@ -42,6 +42,7 @@
 #include <unordered_map>
 #include <vector>
 #include <iostream>
+ #include <sstream>
 using namespace std;
 
 class PyType; 

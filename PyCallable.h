@@ -39,9 +39,12 @@ public:
     PyCallable();
     PyCallable(const PyCallable& orig);
     virtual ~PyCallable();
+    virtual string toString();
     
 protected:
     virtual PyObject* __call__(vector<PyObject*>* args) = 0;
+    virtual PyObject* __repr__(vector<PyObject*>* args);
+    virtual PyObject* __str__(vector<PyObject*>* args);
 };
 
 #endif	/* PYCALLABLE_H */

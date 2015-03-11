@@ -28,3 +28,30 @@ PyCallable::PyCallable(const PyCallable& orig) {
 
 PyCallable::~PyCallable() {
 }
+
+string PyCallable::toString() {
+    return "callable";
+}
+
+PyObject* PyCallable::__str__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 0) {
+        msg << "TypeError expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    string s = "<built-in function " + toString() + ">";
+    return new PyStr(s);
+}
+
+PyObject* PyCallable::__repr__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 0) {
+        msg << "TypeError expected 0 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+    
+    return __str__(args);
+}

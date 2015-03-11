@@ -56,6 +56,18 @@ string PyFunListElm::toString() {
     return s.str();
 }
 
+string PyFunListElm::toRepr() {
+    ostringstream s;
+    vector<PyObject*>* args;
+    
+    s << *head->callMethod("__repr__", args);
+    if (tail!=NULL) {
+        s << ", " << *tail->getHead()->callMethod("__repr__", args);
+    }
+    
+    return s.str();
+}
+
 PyObject* PyFunListElm::getHead() {
     return head;
 }
@@ -75,7 +87,7 @@ PyFunList::PyFunList(vector<PyObject*>* lst) : PyObject() {
         tmp = new PyFunListElm((*lst)[k],tmp);
     }
     data = tmp;
-    
+    dict["__str__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__str__);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__len__);
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__iter__);
@@ -87,6 +99,7 @@ PyFunList::PyFunList(vector<PyObject*>* lst) : PyObject() {
 
 PyFunList::PyFunList() : PyObject() {
     data = NULL;
+    dict["__str__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__str__);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__len__);
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__iter__);
@@ -98,7 +111,7 @@ PyFunList::PyFunList() : PyObject() {
 
 PyFunList::PyFunList(PyObject* h, PyFunList* t) : PyObject() {
     data = new PyFunListElm(h,t->getElm());
-    
+    dict["__str__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__str__);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__len__);
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__iter__);
@@ -110,7 +123,7 @@ PyFunList::PyFunList(PyObject* h, PyFunList* t) : PyObject() {
 
 PyFunList::PyFunList(PyFunListElm* elm) : PyObject() {
     data = elm;
-    
+    dict["__str__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__str__);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__getitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__len__);
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFunList::__iter__);
@@ -138,6 +151,23 @@ string PyFunList::toString() {
     s << "]";
     
     return s.str();
+}
+
+PyObject* PyFunList::__str__(vector<PyObject*>* args) {
+    ostringstream s;
+    
+    s << "[";
+    
+    if (data!=NULL)
+       s << data->toRepr();
+    
+    s << "]";
+    
+    return new PyStr(s.str());
+}
+
+PyObject* PyFunList::__repr__(vector<PyObject*>* args) {
+    return __str__(args);
 }
 
 PyObject* PyFunList::__getitem__(vector<PyObject*>* args) {

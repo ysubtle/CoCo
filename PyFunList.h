@@ -44,6 +44,8 @@ public:
     
 protected:
     PyFunListElm* data;
+    virtual PyObject* __str__(vector<PyObject*>* args);
+    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __getitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);
     virtual PyObject* __iter__(vector<PyObject*>* args);
@@ -58,6 +60,7 @@ public:
     PyFunListElm(PyObject* head, PyFunListElm* tail);
     ~PyFunListElm();
     string toString();
+    string toRepr();
     PyObject* getHead();
     PyFunListElm* getTail();
     int getLen();

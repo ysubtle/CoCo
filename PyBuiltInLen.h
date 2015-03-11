@@ -32,8 +32,6 @@ public:
     string toString();
     
 protected:
-	virtual PyObject* __str__(vector<PyObject*>* args);
-	virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __call__(vector<PyObject*>* args);
 };
 

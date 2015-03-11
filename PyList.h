@@ -37,8 +37,6 @@ public:
     
 protected:
     vector<PyObject*> data;
-
-    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __getitem__(vector<PyObject*>* args);
     virtual PyObject* __setitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);

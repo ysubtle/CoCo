@@ -28,7 +28,6 @@ using namespace std;
 PyList::PyList(vector<PyObject*>* lst) : PyObject() {
     data = *lst;
 
-    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__repr__);
     dict["__getitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__getitem__);
     dict["__setitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__setitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__len__);
@@ -49,24 +48,21 @@ void PyList::setVal(int index, PyObject* obj) {
 
 string PyList::toString() {
     ostringstream s;
+
+    vector<PyObject*>* args;
     
     s << "[";
     
     for (int i=0;i<data.size();i++) {
-        s << data[i]->toString();
+        s << *data[i]->callMethod("__repr__", args);
         
         if (i < data.size()-1) 
-            s << ", ";
-        
+            s << ", ";   
     }
     
     s << "]";
     
     return s.str();
-}
-
-PyObject* PyList::__repr__(vector<PyObject*>* args) {
-    return new PyStr(this->toString());
 }
 
 PyObject* PyList::getVal(int index) {
