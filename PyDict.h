@@ -6,6 +6,7 @@
 #include "PyBool.h"
 #include "PyNone.h"
 #include "PyList.h"
+#include "PyStr.h"
 #include <vector>
 #include <sstream>
 #ifndef PYDICT_H
@@ -37,6 +38,8 @@ public:
 protected:
     unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual> map;
     unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>::iterator it;
+    virtual PyObject* __str__(vector<PyObject*>* args);
+    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __getitem__(vector<PyObject*>* args);
     virtual PyObject* __setitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);

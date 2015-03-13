@@ -63,6 +63,25 @@ void PyDict::setVal(PyObject* key, PyObject* val) {
     map.insert(npair);
 }
 
+PyObject* PyDict::__str__(vector<PyObject*>* args) {
+    unordered_map<PyObject*,PyObject*,PyHash,PyKeysEqual>::iterator it;
+    ostringstream s;
+    s << "{";
+    it = map.begin();
+    while (it!=map.end()) {
+        s << *it->first->callMethod("__repr__", args) << ": " << *it->second->callMethod("__repr__", args);
+        it++;
+        if (it!=map.end())
+            s << ", ";
+    }
+    s << "}";
+    return new PyStr(s.str());
+}
+
+PyObject* PyDict::__repr__(vector<PyObject*>* args) {
+    return __str__(args);
+}
+
 PyObject* PyDict::__getitem__(vector<PyObject*>* args) {
     PyObject* PyKey = (PyObject*) (*args)[0];
     auto se = map.find(PyKey);
