@@ -56,7 +56,7 @@ PyObject* PyStr::__add__(vector<PyObject*>* args) {
 
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     PyStr* arg = (PyStr*) (*args)[0];
@@ -74,7 +74,7 @@ PyObject* PyStr::__float__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     double x;
@@ -93,7 +93,7 @@ PyObject* PyStr::__int__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     int x;
@@ -112,7 +112,7 @@ PyObject* PyStr::__bool__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     if (this->toString() == "")
@@ -126,7 +126,7 @@ PyObject* PyStr::__eq__(vector<PyObject*>* args) {
 
     // if (args->size() != 1) {
     //     msg << "TypeError expected 1 arguments, got " << args->size();
-    //     throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    //     throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     // }
     PyStr* arg = (PyStr*) (*args)[0];
     
@@ -141,7 +141,7 @@ PyObject* PyStr::__hash__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
 
     hash<string> hash_string;
@@ -226,7 +226,7 @@ PyObject* PyStr::__getitem__(vector<PyObject*>* args) {
 
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     PyInt* intObj = (PyInt*) (*args)[0];
@@ -250,7 +250,7 @@ PyObject* PyStr::__len__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return new PyInt(val.size());
@@ -261,7 +261,7 @@ PyObject* PyStr::__iter__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return new PyStrIterator(this);

@@ -59,7 +59,7 @@ PyObject* PyFloat::__add__(vector<PyObject*>* args) {
 
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     PyFloat* arg2 = (PyFloat*) (*args)[0];
@@ -80,7 +80,7 @@ PyObject* PyFloat::__float__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return this;
@@ -91,7 +91,7 @@ PyObject* PyFloat::__int__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     int x;
@@ -105,7 +105,7 @@ PyObject* PyFloat::__bool__(vector<PyObject*>* args) {
     
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     if (this->getVal()==0.0)
@@ -119,7 +119,7 @@ PyObject* PyFloat::__hash__(vector<PyObject*>* args) {
     
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
 
     return new PyInt(static_cast<int>(this->val));
@@ -130,7 +130,7 @@ PyObject* PyFloat::__eq__(vector<PyObject*>* args) {
 
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     //We should check the type of args[0] before casting it. 

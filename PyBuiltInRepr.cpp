@@ -25,7 +25,7 @@ PyObject* PyBuiltInRepr::__call__(vector<PyObject*>* args) {
     
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
 
     x = (*args)[0];

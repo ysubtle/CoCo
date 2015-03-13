@@ -91,7 +91,7 @@ PyObject* PyObject::__str__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return new PyStr(toString());
@@ -102,7 +102,7 @@ PyObject* PyObject::__repr__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return new PyStr(toString());
@@ -113,7 +113,7 @@ PyObject* PyObject::__type__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return (PyObject*)this->getType();

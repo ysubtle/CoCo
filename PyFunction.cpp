@@ -44,7 +44,7 @@ PyObject* PyFunction::__call__(vector<PyObject*>* args) {
 
     if (args->size() != code.getArgCount()) {
         msg << "TypeError expected " << code.getArgCount() << " arguments, got " << args->size() << " for function " << code.getName();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
 
     PyFrame* frame = new PyFrame(code,args,globals,code.getConsts(),cellvars);

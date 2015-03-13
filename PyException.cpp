@@ -23,6 +23,7 @@
 #include "PyBool.h"
 #include <unordered_map>
 #include <sstream>
+#include <string>
 using namespace std;
 
 struct names {
@@ -51,6 +52,12 @@ PyException::PyException(int exception, string msg) : PyObject(), exceptionType(
     dict["__excmatch__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyException::__excmatch__);
 }
 
+PyException::PyException(int exception, string msg, const char *file, int line) : PyObject(), exceptionType(exception), val(new PyStr(msg)) {
+    string file_s(file);
+    printf ("%s : %d" , file , line);
+    dict["__excmatch__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyException::__excmatch__);
+}
+
 PyException::~PyException() {
     try {
         delete val;
@@ -73,6 +80,10 @@ void PyException::printTraceBack() {
     for (int k=0; k<traceback.size();k++) {
         cerr << "==========> At PC=" << (traceback[k]->getPC()-1) << " in this function. " << endl;
         cerr << traceback[k]->getCode().prettyString("",true);
+        cerr << "File name:" << file_s;
+        if (file_s != "") {
+            cerr << "File name:" << file_s;
+        }
     }
 }
 
@@ -85,7 +96,7 @@ PyObject* PyException::__excmatch__(vector<PyObject*>* args) {
     
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());      }
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);      }
     
     PyObject* arg = (*args)[0];
     

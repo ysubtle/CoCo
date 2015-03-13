@@ -78,7 +78,7 @@ PyObject* PyDict::__setitem__(vector<PyObject*>* args) {
 
     if (args->size() != 2) {
         msg << "TypeError expected 2 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
 
     PyObject* key = (PyObject*) (*args)[0];
@@ -96,7 +96,7 @@ PyObject* PyDict::__len__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     return new PyInt(map.size());
@@ -107,7 +107,7 @@ PyObject* PyDict::__iter__(vector<PyObject*>* args) {
 
     if (args->size() != 0) {
         msg << "TypeError expected 0 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);
     }
 
     return new PyDictIterator(&map);

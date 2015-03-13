@@ -64,7 +64,7 @@ PyObject* PyRange::__getitem__(vector<PyObject*>* args) {
     
     if (args->size() != 1) {
         msg << "TypeError expected 1 arguments, got " << args->size();
-        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str(),__FILE__,__LINE__);  
     }
     
     PyInt* indexObj = (PyInt*) (*args)[0];

@@ -57,7 +57,8 @@ using namespace std;
 class PyException : public PyObject {
 public:
     PyException(int exceptType, PyObject* val);
-    PyException(int exceptType, string message);
+    PyException(int exceptType, string msg);
+    PyException(int exceptType, string msg, const char *file, int line);
     virtual ~PyException();
     int getExceptionType();
     void tracebackAppend(PyFrame* frame);
@@ -73,6 +74,7 @@ protected:
      */
     int exceptionType;
     PyObject* val;
+    string file_s = "";
     vector<PyFrame*> traceback;
 
     virtual PyObject* __excmatch__(vector<PyObject*>* args);
