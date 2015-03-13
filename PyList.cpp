@@ -22,6 +22,7 @@
 #include "PyNone.h"
 #include "PyInt.h"
 #include "PyStr.h"
+#include "PyBool.h"
 #include <sstream>
 using namespace std;
 
@@ -32,6 +33,7 @@ PyList::PyList(vector<PyObject*>* lst) : PyObject() {
     dict["__setitem__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__setitem__);
     dict["__len__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__len__);
     dict["__iter__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__iter__);
+    dict["__eq__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::__eq__);
     dict["append"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyList::append);
 }
 
@@ -63,6 +65,25 @@ string PyList::toString() {
     s << "]";
     
     return s.str();
+}
+
+PyObject* PyList::__eq__(vector<PyObject*>* args) {
+    ostringstream msg;
+
+    if (args->size() != 1) {
+        msg << "TypeError expected 1 arguments, got " << args->size();
+        throw new PyException(PYWRONGARGCOUNTEXCEPTION,msg.str());  
+    }
+
+    PyObject* obj = (*args)[0];
+
+    if (obj->getType() != this->getType()) {
+        return new PyBool(false);
+    }
+
+    PyList* other = (PyList*) (*args)[0];
+
+    return new PyBool(data == other->data);
 }
 
 PyObject* PyList::getVal(int index) {

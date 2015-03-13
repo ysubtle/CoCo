@@ -41,6 +41,7 @@ protected:
     virtual PyObject* __setitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);
     virtual PyObject* __iter__(vector<PyObject*>* args);
+    virtual PyObject* __eq__(vector<PyObject*>* args);
     virtual PyObject* append(vector<PyObject*>* args);
 };
 

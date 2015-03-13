@@ -20,6 +20,7 @@
 #include "PyTupleIterator.h"
 #include "PyException.h"
 #include "PyInt.h"
+#include "PyStr.h"
 #include "PyType.h"
 #include "PyBool.h"
 #include <sstream>
@@ -65,6 +66,31 @@ string PyTuple::toString() {
     s << ")";
     
     return s.str();
+}
+
+PyObject* PyTuple::__str__(vector<PyObject*>* args) {
+    ostringstream s;
+    
+    s << "(";
+    
+    for (int i=0;i<data.size();i++) {
+        if (data[i]->getType()->typeId()==PyStrType) 
+            s << "\'" << data[i]->callMethod("__repr__", args) << "\'";
+        else
+            s << data[i]->callMethod("__repr__", args);
+        
+        if (i < data.size()-1) 
+            s << ", ";
+        
+    }
+    
+    s << ")";
+    
+    return new PyStr(s.str());
+}
+
+PyObject* PyTuple::__repr__(vector<PyObject*>* args) {
+    return __str__(args);
 }
 
 PyObject* PyTuple::getVal(int index) {

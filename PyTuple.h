@@ -48,6 +48,8 @@ protected:
     virtual PyObject* __getitem__(vector<PyObject*>* args);
     virtual PyObject* __len__(vector<PyObject*>* args);
     virtual PyObject* __iter__(vector<PyObject*>* args);
+    virtual PyObject* __str__(vector<PyObject*>* args);
+    virtual PyObject* __repr__(vector<PyObject*>* args);
 };
 
 
