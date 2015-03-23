@@ -46,21 +46,19 @@ PyType* PyTuple::getType() {
 int PyTuple::size() {
     return data.size();
 }
-
+// Call repr here
 string PyTuple::toString() {
     ostringstream s;
+
+    vector<PyObject*>* args;
     
     s << "(";
     
     for (int i=0;i<data.size();i++) {
-        if (data[i]->getType()->typeId()==PyStrType) 
-            s << "\'" << data[i]->toString() << "\'";
-        else
-            s << data[i]->toString();
+        s << *data[i]->callMethod("__repr__", args);
         
         if (i < data.size()-1) 
-            s << ", ";
-        
+            s << ", ";   
     }
     
     s << ")";
@@ -75,9 +73,9 @@ PyObject* PyTuple::__str__(vector<PyObject*>* args) {
     
     for (int i=0;i<data.size();i++) {
         if (data[i]->getType()->typeId()==PyStrType) 
-            s << "\'" << data[i]->callMethod("__repr__", args) << "\'";
+            s << *data[i]->callMethod("__repr__", args);
         else
-            s << data[i]->callMethod("__repr__", args);
+            s << *data[i]->callMethod("__repr__", args);
         
         if (i < data.size()-1) 
             s << ", ";

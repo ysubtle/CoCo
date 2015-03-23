@@ -31,7 +31,6 @@ public:
 protected:
     double val;
 
-    virtual PyObject* __repr__(vector<PyObject*>* args);
     virtual PyObject* __add__(vector<PyObject*>* args);
     virtual PyObject* __float__(vector<PyObject*>* args);
     virtual PyObject* __int__(vector<PyObject*>* args);

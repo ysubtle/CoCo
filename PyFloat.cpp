@@ -27,7 +27,6 @@ using namespace std;
 
 PyFloat::PyFloat(double f) : PyObject() {
     val = f;
-    dict["__repr__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__repr__);
     dict["__add__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__add__);
     dict["__float__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__float__);
     dict["__int__"] = (PyObject* (PyObject::*)(vector<PyObject*>*)) (&PyFloat::__int__);
@@ -48,10 +47,6 @@ string PyFloat::toString() {
     stringstream ss;
     ss << buffer;
     return ss.str();
-}
-
-PyObject* PyFloat::__repr__(vector<PyObject*>* args) {
-    return new PyStr(this->toString());
 }
 
 PyObject* PyFloat::__add__(vector<PyObject*>* args) {
